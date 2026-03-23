@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login - Mizpah Wellness Spa</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* LOGIN PAGE STYLE */
+.login-container {
+  display: flex;
+  height: 100vh;
+}
+
+/* LEFT SIDE (FORM) */
+.login-form {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f2ee;
+}
+
+.form-box {
+  background: white;
+  padding: 40px;
+  border-radius: 15px;
+  width: 350px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.form-box h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+
+.form-box p {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.form-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.form-box button {
+  width: 100%;
+  margin-top: 15px;
+}
+
+/* RIGHT SIDE (IMAGE) */
+.login-image {
+  flex: 1;
+  background: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874');
+  background-size: cover;
+  background-position: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+
+  .login-image {
+    height: 200px;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+  <!-- LEFT FORM -->
+  <div class="login-form">
+    <div class="form-box">
+
+      <h2>Welcome Back</h2>
+      <p>Login to continue your wellness journey</p>
+
+      <form onsubmit="loginUser(event)">
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+
+        <button class="btn-primary">Login</button>
+      </form>
+
+      <p style="margin-top:15px; font-size:13px;">
+        Don't have an account? <a href="#">Sign up</a>
+      </p>
+
+    </div>
+  </div>
+
+  <!-- RIGHT IMAGE -->
+  <div class="login-image"></div>
+
+</div>
+
+<!-- JS REDIRECT -->
+<script>
+function loginUser(e) {
+  e.preventDefault();
+
+  // fake login success
+  alert("Login Successful!");
+
+  // redirect to booking page
+  window.location.href = "booking.html";
+}
+</script>
+
+</body>
+</html>

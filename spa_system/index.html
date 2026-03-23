@@ -10,15 +10,17 @@
 
 <body>
 
+<!-- HEADER -->
 <header>
   <h2>Mizpah Wellness Spa</h2>
   <nav>
     <a href="#">Home</a>
-    <a href="#">Services</a>
-    <a href="#">Therapists</a>
+    <a href="#services">Services</a>
+    <a href="therapists.html">Therapists</a>
     <a href="#">Virtual Tour</a>
 
-    <a href="booking.html" class="btn-primary">Book Appointment</a>
+    <!-- FLOW: LOGIN FIRST -->
+    <a href="login.html" class="btn-primary">Book Appointment</a>
     <a href="login.html" class="btn-outline">Login</a>
   </nav>
 </header>
@@ -37,15 +39,15 @@
     </p>
 
     <div class="hero-buttons">
-      <a href="booking.html" class="btn-primary">Book Appointment</a>
-      <button class="btn-outline">Explore Spa Tour</button>
-      <button class="btn-outline">View Therapists</button>
+      <a href="login.html" class="btn-primary">Book Appointment</a>
+      <a href="#" class="btn-outline">Explore Spa Tour</a>
+      <a href="therapists.html" class="btn-outline">View Therapists</a>
     </div>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section class="services">
+<section class="services" id="services">
   <h2>Our Premium Services</h2>
   <p>Indulge in our carefully curated selection of therapeutic treatments designed to restore balance and harmony.</p>
 
@@ -78,7 +80,7 @@
   </div>
 
   <div class="services-btn">
-    <a href="booking.html" class="btn-primary">Book Your Treatment</a>
+    <a href="login.html" class="btn-primary">Book Your Treatment</a>
   </div>
 </section>
 
@@ -107,6 +109,13 @@
   </div>
 </section>
 
+<!-- CTA SECTION (OPTIONAL PANG PLUS POINTS 💯) -->
+<section style="text-align:center; padding:60px;">
+  <h2>Ready to Relax?</h2>
+  <p>Book your appointment today and experience true wellness.</p>
+  <a href="login.html" class="btn-primary">Get Started</a>
+</section>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-container">
@@ -118,8 +127,8 @@
 
     <div>
       <h4>Quick Links</h4>
-      <p>Book Appointment</p>
-      <p>Therapists</p>
+      <p><a href="login.html">Book Appointment</a></p>
+      <p><a href="therapists.html">Therapists</a></p>
       <p>Virtual Tour</p>
     </div>
 

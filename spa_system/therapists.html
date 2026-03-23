@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Therapists - Mizpah Wellness Spa</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+.therapists {
+  padding: 60px;
+  text-align: center;
+}
+
+.therapist-container {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.therapist-card {
+  background: white;
+  width: 250px;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid #a07c5a;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.therapist-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.therapist-card h3 {
+  margin: 10px 0 5px;
+}
+
+.rating {
+  color: gold;
+}
+
+.specialty {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.select-btn {
+  display: inline-block;
+  margin-top: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+  <h2>Mizpah Wellness Spa</h2>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="booking.html">Booking</a>
+  </nav>
+</header>
+
+<section class="therapists">
+
+  <h2>Meet Our Expert Therapists</h2>
+  <p>Choose from our highly trained wellness professionals.</p>
+
+  <div class="therapist-container">
+
+    <div class="therapist-card">
+      <img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e">
+      <h3>Anna Reyes</h3>
+      <p class="rating">⭐⭐⭐⭐⭐</p>
+      <p class="specialty">Swedish & Relaxation</p>
+      <a href="booking.html" class="btn-primary select-btn">Select</a>
+    </div>
+
+    <div class="therapist-card">
+      <img src="https://images.unsplash.com/photo-1595152772835-219674b2a8a6">
+      <h3>Mark Santos</h3>
+      <p class="rating">⭐⭐⭐⭐⭐</p>
+      <p class="specialty">Deep Tissue Expert</p>
+      <a href="booking.html" class="btn-primary select-btn">Select</a>
+    </div>
+
+    <div class="therapist-card">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956">
+      <h3>Lisa Cruz</h3>
+      <p class="rating">⭐⭐⭐⭐⭐</p>
+      <p class="specialty">Hot Stone Therapy</p>
+      <a href="booking.html" class="btn-primary select-btn">Select</a>
+    </div>
+
+  </div>
+
+</section>
+
+</body>
+</html>
