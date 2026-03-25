@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
-
 .payment {
   padding: 60px;
   text-align: center;
@@ -16,18 +15,17 @@
 
 .payment-box {
   background: white;
-  max-width: 500px;
+  max-width: 450px;
   margin: auto;
   padding: 30px;
   border-radius: 15px;
   border: 1px solid #a07c5a;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
-/* OPTIONS */
 .payment-options {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 10px;
   margin: 20px 0;
 }
 
@@ -39,46 +37,28 @@
   cursor: pointer;
 }
 
-/* ACTIVE OPTION */
 .payment-options button.active {
   background: #a07c5a;
   color: white;
 }
 
-/* FORM */
-.payment-form {
-  text-align: left;
-}
-
-.payment-form input {
-  width: 100%;
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-/* QR */
-.qr-box {
+.method {
   display: none;
-  text-align: center;
 }
 
-.qr-box img {
-  width: 200px;
-  margin: 10px 0;
+.qr img {
+  width: 180px;
+  margin: 15px 0;
 }
 
-/* SUCCESS */
 .success {
   display: none;
-  text-align: center;
+  margin-top: 20px;
 }
 
-.success h2 {
+.success h3 {
   color: green;
 }
-
 </style>
 </head>
 
@@ -95,43 +75,31 @@
 <section class="payment">
 
   <h2>Complete Your Payment</h2>
-  <p>Select your preferred payment method</p>
+  <p>Select your payment method</p>
 
   <div class="payment-box">
 
-    <!-- OPTIONS -->
     <div class="payment-options">
-      <button onclick="showMethod('card')" class="active">Card</button>
-      <button onclick="showMethod('gcash')">GCash</button>
-      <button onclick="showMethod('spa')">Pay at Spa</button>
+      <button class="active" onclick="showMethod('gcash', this)">GCash</button>
+      <button onclick="showMethod('cash', this)">Cash</button>
     </div>
 
-    <!-- CARD FORM -->
-    <div class="payment-form" id="card">
-      <input type="text" placeholder="Cardholder Name">
-      <input type="text" placeholder="Card Number">
-      <input type="text" placeholder="MM/YY">
-      <input type="text" placeholder="CVV">
+    <div id="gcash" class="method" style="display:block;">
+      <div class="qr">
+        <p>Scan to pay via GCash</p>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=GCASH">
+      </div>
     </div>
 
-    <!-- GCASH -->
-    <div class="qr-box" id="gcash">
-      <p>Scan QR to Pay</p>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=GCASH-DEMO">
-      <input type="file">
-    </div>
-
-    <!-- PAY AT SPA -->
-    <div class="qr-box" id="spa">
+    <div id="cash" class="method">
       <p>You can pay at the spa upon arrival.</p>
     </div>
 
     <button class="btn-primary" onclick="payNow()">Confirm Payment</button>
 
-    <!-- SUCCESS -->
     <div class="success" id="success">
-      <h2>✅ Payment Successful!</h2>
-      <p>Your appointment has been booked.</p>
+      <h3>Payment Successful</h3>
+      <p>Your booking is confirmed</p>
     </div>
 
   </div>
@@ -139,20 +107,18 @@
 </section>
 
 <script>
-function showMethod(method) {
-  document.getElementById("card").style.display = "none";
-  document.getElementById("gcash").style.display = "none";
-  document.getElementById("spa").style.display = "none";
+function showMethod(id, btn){
+  document.getElementById('gcash').style.display='none';
+  document.getElementById('cash').style.display='none';
+  document.getElementById(id).style.display='block';
 
-  document.getElementById(method).style.display = "block";
-
-  let buttons = document.querySelectorAll(".payment-options button");
-  buttons.forEach(btn => btn.classList.remove("active"));
-  event.target.classList.add("active");
+  let buttons=document.querySelectorAll('.payment-options button');
+  buttons.forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
 }
 
-function payNow() {
-  document.getElementById("success").style.display = "block";
+function payNow(){
+  document.getElementById('success').style.display='block';
 }
 </script>
 
