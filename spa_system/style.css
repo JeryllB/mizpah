@@ -67,6 +67,18 @@ nav a {
   margin-top: 20px;
 }
 
+.hero-text {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.sub-text {
+  display: block;
+  margin-top: 8px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
 /* SERVICES */
 .services {
   padding: 60px 20px;
@@ -171,6 +183,102 @@ nav a {
 .booking-header {
   text-align: center;
   margin-bottom: 30px;
+}
+
+.form-card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 700px;
+  margin: auto;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.form-header {
+  background: linear-gradient(to right, #8b6b4a, #c2a27a);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #f2ece6;
+  margin-top: 5px;
+}
+
+.link {
+  display: inline-block;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+.note {
+  background: #f3e9dc;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.calendar-box {
+  background: #faf7f3;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-top: 10px;
+}
+
+.calendar span {
+  padding: 8px;
+  text-align: center;
+}
+
+.calendar .active {
+  background: #a07c5a;
+  color: white;
+  border-radius: 50%;
+}
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.time-slots span {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #a07c5a;
+  text-align: center;
+}
+
+.btn-primary.full {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* FORM BOX */

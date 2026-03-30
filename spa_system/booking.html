@@ -23,23 +23,36 @@
   <div class="booking-header">
     <h2>Book Your Appointment</h2>
     <p>Select your preferred service, therapist, and time</p>
-    <p>Bookings must be made at least 4 hours before the selected schedule.</p>
+    <p class="note">Bookings must be made at least 4 hours before the selected schedule.</p>
   </div>
 
-  <div class="form-section">
+  <div class="form-card">
 
-    <h3 class="section-title">Appointment Details</h3>
+    <div class="form-header">
+      Appointment Details
+    </div>
 
-    <input type="text" placeholder="Full Name">
-    <input type="email" placeholder="Email Address">
+    <div class="form-grid">
+      <div>
+        <label>Your Name</label>
+        <input type="text" placeholder="John Doe">
+      </div>
 
+      <div>
+        <label>Email Address</label>
+        <input type="email" placeholder="john@example.com">
+      </div>
+    </div>
+
+    <label>Select Service</label>
     <select>
       <option>Choose a service...</option>
       <option>Swedish Massage - 60 min</option>
       <option>Deep Tissue - 90 min</option>
-      <option>Hot Stone Therapy - 90 min</option>
+      <option>Hot Stone Therapy - 75 min</option>
     </select>
 
+    <label>Choose Your Therapist</label>
     <select>
       <option>Select a therapist...</option>
       <option>Anna Reyes</option>
@@ -47,8 +60,9 @@
       <option>Lisa Cruz</option>
     </select>
 
-    <a href="therapists.html">View therapist profiles →</a>
+    <a href="therapists.html" class="link">View therapist profiles →</a>
 
+    <label>Select Room</label>
     <select>
       <option>Choose a room...</option>
       <option>Room 1 - Serenity</option>
@@ -56,32 +70,34 @@
       <option>Room 3 - Tranquility</option>
     </select>
 
-    <h4>March 2026</h4>
+    <label>Select Date</label>
 
-    <div class="calendar-days">
-      <span>Su</span><span>Mo</span><span>Tu</span><span>We</span>
-      <span>Th</span><span>Fr</span><span>Sa</span>
+    <div class="calendar-box">
+      <h4>March 2026</h4>
+
+      <div class="calendar">
+        <span>1</span><span>2</span><span>3</span><span>4</span>
+        <span>5</span><span>6</span><span>7</span>
+        <span>8</span><span>9</span><span>10</span><span>11</span>
+        <span>12</span><span>13</span><span>14</span>
+        <span>15</span><span>16</span><span>17</span><span>18</span>
+        <span>19</span><span>20</span><span>21</span>
+        <span>22</span><span class="active">23</span><span>24</span>
+        <span>25</span><span>26</span><span>27</span><span>28</span>
+        <span>29</span><span>30</span><span>31</span>
+      </div>
     </div>
 
-    <div class="calendar">
-      <span>1</span><span>2</span><span>3</span><span>4</span>
-      <span>5</span><span>6</span><span>7</span><span>8</span>
-      <span>9</span><span>10</span><span>11</span><span>12</span>
-      <span>13</span><span>14</span><span>15</span><span>16</span>
-      <span>17</span><span>18</span><span>19</span><span>20</span>
-      <span>21</span><span>22</span><span>23</span><span>24</span>
-      <span>25</span><span>26</span><span>27</span><span>28</span>
-      <span>29</span><span>30</span><span>31</span>
-    </div>
+    <label>Select Time</label>
 
     <div class="time-slots">
-      <span>09:00</span><span>10:00</span><span>11:00</span>
-      <span>12:00</span><span>13:00</span><span>14:00</span>
       <span>15:00</span><span>16:00</span><span>17:00</span>
-      <span>18:00</span>
+      <span>18:00</span><span>19:00</span>
+      <span>20:00</span><span>21:00</span><span>22:00</span>
+      <span>23:00</span><span>24:00</span>
     </div>
 
-    <a href="payment.html" class="btn-primary">Proceed to Payment</a>
+    <a href="payment.html" class="btn-primary full">Proceed to Payment</a>
 
   </div>
 
