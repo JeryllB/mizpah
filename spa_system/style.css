@@ -44,13 +44,15 @@ nav a {
 /* HERO */
 .hero {
   background:
-    linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.6)),
+    linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)),
     url('images/hero.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  padding: 120px 60px;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
 }
 
 .hero h1 {
@@ -72,6 +74,11 @@ nav a {
   line-height: 1.6;
 }
 
+.hero-content {
+  max-width: 600px;
+  margin-left: 60px;
+}
+
 .sub-text {
   display: block;
   margin-top: 8px;
@@ -83,6 +90,10 @@ nav a {
 .services {
   padding: 60px 20px;
   text-align: center;
+}
+
+.services-btn {
+  margin-top: 50px;
 }
 
 .card-container {
@@ -279,6 +290,9 @@ input, select {
   width: 100%;
   text-align: center;
   margin-top: 20px;
+  padding: 12px;
+  border-radius: 10px;
+  box-sizing: border-box;
 }
 
 /* FORM BOX */
