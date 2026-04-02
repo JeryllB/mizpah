@@ -97,11 +97,97 @@
       <span>23:00</span><span>24:00</span>
     </div>
 
-    <a href="payment.html" class="btn-primary full">Proceed to Payment</a>
+    <div class="summary-box">
+  <h3>Booking Summary</h3>
+
+  <p>Service: <span id="sum-service">-</span></p>
+  <p>Duration: <span id="sum-duration">-</span></p>
+  <p>Date: <span id="sum-date">-</span></p>
+  <p>Time: <span id="sum-time">-</span></p>
+
+  <hr>
+
+  <h2>Total: <span id="sum-price">$0</span></h2>
+</div>
+
+    <button class="btn-primary full" onclick="goToSummary()">Proceed</button>
 
   </div>
 
 </div>
+
+<script>
+function goToSummary() {
+  const name = document.querySelector('input[type="text"]').value;
+  const email = document.querySelector('input[type="email"]').value;
+  const service = document.querySelectorAll('select')[0].value;
+  const therapist = document.querySelectorAll('select')[1].value;
+  const room = document.querySelectorAll('select')[2].value;
+
+  const date = document.getElementById("sum-date").innerText;
+  const time = document.getElementById("sum-time").innerText;
+  const price = document.getElementById("sum-price").innerText;
+
+  localStorage.setItem("name", name);
+  localStorage.setItem("email", email);
+  localStorage.setItem("service", service);
+  localStorage.setItem("therapist", therapist);
+  localStorage.setItem("room", room);
+  localStorage.setItem("date", date);
+  localStorage.setItem("time", time);
+  localStorage.setItem("price", price);
+
+  window.location.href = "payment.html";
+}
+</script>
+
+<script>
+
+// SERVICE DATA (important)
+const services = {
+  "Reflexology - 45 min - $95": { duration: "45 minutes", price: 95 },
+  "Swedish Massage - 60 min - $120": { duration: "60 minutes", price: 120 },
+  "Deep Tissue - 90 min - $150": { duration: "90 minutes", price: 150 }
+};
+
+// SELECT ELEMENTS
+const serviceSelect = document.querySelectorAll("select")[0];
+const calendarDays = document.querySelectorAll(".calendar span");
+const timeSlots = document.querySelectorAll(".time-slots span");
+
+// UPDATE SERVICE
+serviceSelect.addEventListener("change", () => {
+  const selected = serviceSelect.value;
+
+  document.getElementById("sum-service").innerText = selected;
+
+  if (services[selected]) {
+    document.getElementById("sum-duration").innerText = services[selected].duration;
+    document.getElementById("sum-price").innerText = "$" + services[selected].price;
+  }
+});
+
+// SELECT DATE
+calendarDays.forEach(day => {
+  day.addEventListener("click", () => {
+    calendarDays.forEach(d => d.classList.remove("active"));
+    day.classList.add("active");
+
+    document.getElementById("sum-date").innerText = day.innerText + "/2026";
+  });
+});
+
+// SELECT TIME
+timeSlots.forEach(time => {
+  time.addEventListener("click", () => {
+    timeSlots.forEach(t => t.classList.remove("active"));
+    time.classList.add("active");
+
+    document.getElementById("sum-time").innerText = time.innerText;
+  });
+});
+
+</script>
 
 </body>
 </html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Therapist Profile</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+.profile {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px;
+}
+
+/* HEADER FIX */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: white;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.back-link {
+  text-decoration: none;
+  color: #5a4632;
+  font-size: 14px;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* MAIN CARD */
+.profile-card {
+  display: flex;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* LEFT IMAGE */
+.profile-img {
+  width: 45%;
+}
+
+.profile-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RIGHT INFO */
+.profile-info {
+  width: 55%;
+  padding: 30px;
+}
+
+.profile-info h2 {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+}
+
+/* BADGES */
+.stats {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.badge {
+  background: #f3e9dc;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+/* SECTIONS */
+.section {
+  margin-top: 20px;
+}
+
+.section h3 {
+  border-left: 5px solid #a07c5a;
+  padding-left: 10px;
+}
+
+/* RATING BOX */
+.rating-box {
+  background: #f3e9dc;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+/* BUTTON */
+.book-btn {
+  display: inline-block;
+  margin-top: 15px;
+  background: linear-gradient(to right, #8b6b4a, #c2a27a);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+
+/* REVIEWS */
+.review {
+  background: #f9f5f1;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .profile-card {
+    flex-direction: column;
+  }
+
+  .profile-img,
+  .profile-info {
+    width: 100%;
+  }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ✅ HEADER FIXED -->
+<header class="header-top">
+
+  <h2>Mizpah Wellness Spa</h2>
+
+  <div class="header-right">
+    <a href="therapists.html">← Back to Therapists</a>
+    <a href="index.html">Home</a>
+  </div>
+
+</header>
+
+<div class="profile">
+
+  <div class="profile-card">
+
+    <!-- LEFT IMAGE -->
+    <div class="profile-img">
+      <img src="images/therapist2.jpg">
+    </div>
+
+    <!-- RIGHT INFO -->
+    <div class="profile-info">
+
+      <h2>Marcus Santos</h2>
+
+      <div class="stats">
+        <span class="badge">8 years of experience</span>
+        <span class="badge">98 client reviews</span>
+      </div>
+
+      <div class="section">
+        <h3>Professional Credentials</h3>
+        <p>Sports Massage Therapist</p>
+        <p>Myofascial Release Certified</p>
+        <p>Trigger Point Therapy</p>
+      </div>
+
+      <div class="section">
+        <h3>Areas of Specialization</h3>
+        <p>Sports Massage</p>
+        <p>Myofascial Release</p>
+        <p>Injury Recovery</p>
+      </div>
+
+      <div class="section">
+        <h3>About</h3>
+        <p>
+          Marcus specializes in sports massage and injury rehabilitation,
+          helping clients recover and perform at their best.
+        </p>
+      </div>
+
+      <div class="section">
+        <h3>Client Satisfaction</h3>
+
+        <div class="rating-box">
+          <h2>4.8 out of 5</h2>
+          <p>98 Total Reviews</p>
+        </div>
+
+        <a href="booking.html" class="book-btn">Book Appointment</a>
+      </div>
+
+      <div class="section">
+        <h3>Client Reviews</h3>
+
+        <div class="review">
+          <p>"Absolutely amazing! My stress just melted away."</p>
+          <strong>Jennifer Adams</strong>
+        </div>
+
+        <div class="review">
+          <p>"Professional, skilled, and caring. Highly recommend!"</p>
+          <strong>Robert Chen</strong>
+        </div>
+
+        <div class="review">
+          <p>"Best massage experience I've ever had!"</p>
+          <strong>Maria Lopez</strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -4,62 +4,109 @@
 <meta charset="UTF-8">
 <title>Payment - Mizpah Wellness Spa</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
 <style>
-.payment {
-  padding: 60px;
-  text-align: center;
-}
-
-.payment-box {
-  background: white;
-  max-width: 450px;
-  margin: auto;
-  padding: 30px;
-  border-radius: 15px;
-  border: 1px solid #a07c5a;
-}
-
-.payment-options {
+.payment-container {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
+  gap: 30px;
+  padding: 50px;
+  max-width: 1100px;
+  margin: auto;
 }
 
-.payment-options button {
-  padding: 10px 15px;
-  border-radius: 8px;
-  border: 1px solid #a07c5a;
-  background: transparent;
+.payment-left {
+  flex: 2;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.payment-right {
+  flex: 1;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  height: fit-content;
+}
+
+.section-title {
+  background: linear-gradient(to right, #8b6b4a, #c2a27a);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.option-box {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.option-box input {
+  margin-right: 10px;
+}
+
+.form-group {
+  margin-top: 10px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #f2ece6;
+  margin-top: 5px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.complete-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(to right, #8b6b4a, #c2a27a);
+  color: white;
+  font-size: 16px;
   cursor: pointer;
 }
 
-.payment-options button.active {
-  background: #a07c5a;
-  color: white;
+.summary p {
+  margin: 10px 0;
 }
 
-.method {
-  display: none;
+.total {
+  font-size: 26px;
+  color: #a07c5a;
+  margin-top: 10px;
 }
 
-.qr img {
-  width: 180px;
-  margin: 15px 0;
-}
-
-.success {
-  display: none;
+.status {
   margin-top: 20px;
+  background: #f3e9dc;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
 }
 
-.success h3 {
-  color: green;
+@media (max-width: 768px) {
+  .payment-container {
+    flex-direction: column;
+  }
 }
 </style>
+
 </head>
 
 <body>
@@ -67,60 +114,76 @@
 <header>
   <h2>Mizpah Wellness Spa</h2>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="booking.html">Booking</a>
+    <a href="booking.html">← Back to Booking</a>
   </nav>
 </header>
 
-<section class="payment">
+<div class="payment-container">
 
-  <h2>Complete Your Payment</h2>
-  <p>Select your payment method</p>
+  <div class="payment-left">
 
-  <div class="payment-box">
+    <div class="section-title">Payment Options</div>
 
-    <div class="payment-options">
-      <button class="active" onclick="showMethod('gcash', this)">GCash</button>
-      <button onclick="showMethod('cash', this)">Cash</button>
-    </div>
+    <div class="option-box">
+      <label>
+        <input type="radio" name="payment" checked>
+        Online Payment (Card)
+      </label>
 
-    <div id="gcash" class="method" style="display:block;">
-      <div class="qr">
-        <p>Scan to pay via GCash</p>
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=GCASH">
+      <div class="form-group">
+        <input type="text" placeholder="Card Number">
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <input type="text" placeholder="MM/YY">
+        </div>
+        <div class="form-group">
+          <input type="text" placeholder="CVV">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="text" placeholder="Cardholder Name">
       </div>
     </div>
 
-    <div id="cash" class="method">
-      <p>You can pay at the spa upon arrival.</p>
+    <div class="option-box">
+      <label>
+        <input type="radio" name="payment">
+        QRPh (GCash)
+      </label>
     </div>
 
-    <button class="btn-primary" onclick="payNow()">Confirm Payment</button>
+    <div class="option-box">
+      <label>
+        <input type="radio" name="payment">
+        Pay at Spa
+      </label>
+    </div>
 
-    <div class="success" id="success">
-      <h3>Payment Successful</h3>
-      <p>Your booking is confirmed</p>
+    <button class="complete-btn">Complete Payment</button>
+
+  </div>
+
+  <div class="payment-right">
+
+    <div class="section-title">Booking Summary</div>
+
+    <div class="summary">
+      <p><strong>Service</strong><br>Deep Tissue Massage</p>
+      <p><strong>Therapist</strong><br>Mark Santos</p>
+      <p><strong>Date & Time</strong><br>March 15, 2026<br>2:00 PM</p>
+      <p><strong>Duration</strong><br>90 minutes</p>
+
+      <div class="total">$150</div>
+
+      <div class="status">Payment Status: Pending</div>
     </div>
 
   </div>
 
-</section>
-
-<script>
-function showMethod(id, btn){
-  document.getElementById('gcash').style.display='none';
-  document.getElementById('cash').style.display='none';
-  document.getElementById(id).style.display='block';
-
-  let buttons=document.querySelectorAll('.payment-options button');
-  buttons.forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-}
-
-function payNow(){
-  document.getElementById('success').style.display='block';
-}
-</script>
+</div>
 
 </body>
 </html>
