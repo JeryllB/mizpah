@@ -360,3 +360,31 @@ input, select {
     grid-template-columns: 1fr;
   }
 }
+
+/* ================= LOGIN ================= */
+
+.login-container {
+  display: flex;
+  height: 100vh;
+}
+
+.login-form {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f2ee;
+}
+
+.login-image {
+  width: 50%;
+  background: url('images/logo.jpg'); /* palitan kung ibang image */
+  background-size: cover;
+  background-position: center;
+}
+
+.login-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
