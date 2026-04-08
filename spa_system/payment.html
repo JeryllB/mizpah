@@ -122,47 +122,23 @@
 
   <div class="payment-left">
 
-    <div class="section-title">Payment Options</div>
+<div class="section-title">Payment Options</div>
 
-    <div class="option-box">
-      <label>
-        <input type="radio" name="payment" checked>
-        Online Payment (Card)
-      </label>
+<div class="option-box">
+  <label>
+    <input type="radio" name="payment" value="gcash" checked>
+    GCash Payment
+  </label>
+</div>
 
-      <div class="form-group">
-        <input type="text" placeholder="Card Number">
-      </div>
+<div class="option-box">
+  <label>
+    <input type="radio" name="payment" value="spa">
+    Pay at Spa
+  </label>
+</div>
 
-      <div class="row">
-        <div class="form-group">
-          <input type="text" placeholder="MM/YY">
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="CVV">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <input type="text" placeholder="Cardholder Name">
-      </div>
-    </div>
-
-    <div class="option-box">
-      <label>
-        <input type="radio" name="payment">
-        QRPh (GCash)
-      </label>
-    </div>
-
-    <div class="option-box">
-      <label>
-        <input type="radio" name="payment">
-        Pay at Spa
-      </label>
-    </div>
-
-    <button class="complete-btn">Complete Payment</button>
+<button class="complete-btn" onclick="completePayment()">Complete Payment</button>
 
   </div>
 
@@ -183,7 +159,20 @@
 
   </div>
 
+  <script>
+function completePayment() {
+  const selected = document.querySelector('input[name="payment"]:checked').value;
+
+  if (selected === "gcash") {
+    alert("Redirecting to GCash...");
+  } else {
+    alert("Booking Confirmed! Please pay at the spa.");
+  }
+
+  window.location.href = "index.html";
+}
+</script>
+
 </div>
 
 </body>
-</html>
