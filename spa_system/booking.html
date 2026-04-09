@@ -28,7 +28,6 @@
 
   <div class="form-card">
 
-    <!-- FORM -->
     <form action="savebooking.php" method="POST">
 
     <div class="form-header">
@@ -56,7 +55,7 @@
     </select>
 
     <label>Choose Your Therapist</label>
-    <select name="therapist" required>
+    <select name="therapist" id="therapist" required>
       <option value="">Select a therapist...</option>
       <option value="Anna Reyes">Anna Reyes</option>
       <option value="Mark Santos">Mark Santos</option>
@@ -73,26 +72,22 @@
 
     <label>Select Date</label>
     <div class="calendar-box">
-      <h4>March 2026</h4>
-      <div class="calendar">
-        <span>1</span><span>2</span><span>3</span><span>4</span>
-        <span>5</span><span>6</span><span>7</span>
-        <span>8</span><span>9</span><span>10</span><span>11</span>
-        <span>12</span><span>13</span><span>14</span>
-        <span>15</span><span>16</span><span>17</span><span>18</span>
-        <span>19</span><span>20</span><span>21</span>
-        <span>22</span><span>23</span><span>24</span>
-        <span>25</span><span>26</span><span>27</span><span>28</span>
-        <span>29</span><span>30</span><span>31</span>
-      </div>
+      <!-- REAL CALENDAR INPUT -->
+      <input type="date" name="date" id="date" required>
     </div>
 
     <label>Select Time</label>
     <div class="time-slots">
-      <span>15:00</span><span>16:00</span><span>17:00</span>
-      <span>18:00</span><span>19:00</span>
-      <span>20:00</span><span>21:00</span><span>22:00</span>
-      <span>23:00</span><span>24:00</span>
+      <span class="time-option" data-time="15:00">15:00</span>
+      <span class="time-option" data-time="16:00">16:00</span>
+      <span class="time-option" data-time="17:00">17:00</span>
+      <span class="time-option" data-time="18:00">18:00</span>
+      <span class="time-option" data-time="19:00">19:00</span>
+      <span class="time-option" data-time="20:00">20:00</span>
+      <span class="time-option" data-time="21:00">21:00</span>
+      <span class="time-option" data-time="22:00">22:00</span>
+      <span class="time-option" data-time="23:00">23:00</span>
+      <span class="time-option" data-time="24:00">24:00</span>
     </div>
 
     <!-- SUMMARY -->
@@ -107,7 +102,6 @@
     <input type="hidden" name="date" id="final-date">
     <input type="hidden" name="time" id="final-time">
 
-    <!-- SUBMIT -->
     <button type="submit" class="btn-primary full">Book Now</button> 
 
     </form>
@@ -118,34 +112,55 @@
 
 <script>
 
-// SERVICE DISPLAY
+// SERVICE
 const serviceSelect = document.querySelector("select[name='service']");
 serviceSelect.addEventListener("change", () => {
   document.getElementById("sum-service").innerText = serviceSelect.value;
 });
 
-// DATE SELECT
-document.querySelectorAll(".calendar span").forEach(day => {
-  day.addEventListener("click", () => {
+// DATE
+const dateInput = document.getElementById("date");
 
-    document.querySelectorAll(".calendar span").forEach(d => d.classList.remove("active"));
-    day.classList.add("active");
+dateInput.addEventListener("change", function () {
+  document.getElementById("sum-date").innerText = this.value;
+  document.getElementById("final-date").value = this.value;
+});
 
-    document.getElementById("sum-date").innerText = day.innerText + "/2026";
-    document.getElementById("final-date").value = day.innerText + "/2026";
+// TIME
+document.querySelectorAll(".time-option").forEach(time => {
+  time.addEventListener("click", () => {
+
+    document.querySelectorAll(".time-option").forEach(t => t.classList.remove("active"));
+    time.classList.add("active");
+
+    document.getElementById("sum-time").innerText = time.dataset.time;
+    document.getElementById("final-time").value = time.dataset.time;
+
   });
 });
 
-// TIME SELECT
-document.querySelectorAll(".time-slots span").forEach(time => {
-  time.addEventListener("click", () => {
+// BLOCK BOOKED DATES
+document.addEventListener("DOMContentLoaded", function () {
 
-    document.querySelectorAll(".time-slots span").forEach(t => t.classList.remove("active"));
-    time.classList.add("active");
+  fetch("get_all_booked_dates.php")
+    .then(res => res.json())
+    .then(disabledDates => {
 
-    document.getElementById("sum-time").innerText = time.innerText;
-    document.getElementById("final-time").value = time.innerText;
-  });
+      const dateInput = document.getElementById("date");
+
+      dateInput.addEventListener("change", function () {
+
+        if (disabledDates.includes(this.value)) {
+          alert("This date is already booked!");
+          this.value = "";
+          document.getElementById("sum-date").innerText = "-";
+          document.getElementById("final-date").value = "";
+        }
+
+      });
+
+    });
+
 });
 
 </script>
