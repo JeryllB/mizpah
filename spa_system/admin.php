@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    header("Location: login.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +21,7 @@
   <h2>Admin Dashboard</h2>
   <nav>
     <a href="index.html">Home</a>
-    <a href="#" onclick="logout()">Logout</a>
+    <a href="logout.php">Logout</a>
   </nav>
 </header>
 
@@ -24,13 +33,6 @@
   <button class="btn-primary">View All Bookings</button>
   <button class="btn-outline">Manage Therapists</button>
 </div>
-
-<script>
-function logout() {
-  localStorage.removeItem("role");
-  window.location.href = "login.html";
-}
-</script>
 
 </body>
 </html>

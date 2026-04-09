@@ -52,24 +52,6 @@
   margin-right: 10px;
 }
 
-.form-group {
-  margin-top: 10px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  background: #f2ece6;
-  margin-top: 5px;
-}
-
-.row {
-  display: flex;
-  gap: 10px;
-}
-
 .complete-btn {
   margin-top: 20px;
   width: 100%;
@@ -120,46 +102,50 @@
 
 <div class="payment-container">
 
+  <!-- LEFT SIDE -->
   <div class="payment-left">
 
-<div class="section-title">Payment Options</div>
+    <div class="section-title">Payment Options</div>
 
-<div class="option-box">
-  <label>
-    <input type="radio" name="payment" value="gcash" checked>
-    GCash Payment
-  </label>
-</div>
+    <div class="option-box">
+      <label>
+        <input type="radio" name="payment" value="gcash" checked>
+        GCash Payment
+      </label>
+    </div>
 
-<div class="option-box">
-  <label>
-    <input type="radio" name="payment" value="spa">
-    Pay at Spa
-  </label>
-</div>
+    <div class="option-box">
+      <label>
+        <input type="radio" name="payment" value="spa">
+        Pay at Spa
+      </label>
+    </div>
 
-<button class="complete-btn" onclick="completePayment()">Complete Payment</button>
+    <button class="complete-btn" onclick="completePayment()">
+      Complete Payment
+    </button>
 
   </div>
 
+  <!-- RIGHT SIDE -->
   <div class="payment-right">
 
     <div class="section-title">Booking Summary</div>
 
     <div class="summary">
-      <p><strong>Service</strong><br>Deep Tissue Massage</p>
-      <p><strong>Therapist</strong><br>Mark Santos</p>
-      <p><strong>Date & Time</strong><br>March 15, 2026<br>2:00 PM</p>
-      <p><strong>Duration</strong><br>90 minutes</p>
+      <p><strong>Service</strong><br>Booking Saved Successfully</p>
+      <p><strong>Status</strong><br>Pending Payment</p>
 
-      <div class="total">$150</div>
+      <div class="total">₱0</div>
 
-      <div class="status">Payment Status: Pending</div>
+      <div class="status">Please complete your payment</div>
     </div>
 
   </div>
 
-  <script>
+</div>
+
+<script>
 function completePayment() {
   const selected = document.querySelector('input[name="payment"]:checked').value;
 
@@ -169,10 +155,10 @@ function completePayment() {
     alert("Booking Confirmed! Please pay at the spa.");
   }
 
+  // redirect back to homepage
   window.location.href = "index.html";
 }
 </script>
 
-</div>
-
 </body>
+</html>
