@@ -290,6 +290,17 @@ input, select {
   color: white;
 }
 
+/* FIX for Flatpickr visibility */
+.flatpickr-calendar {
+  z-index: 9999 !important;
+}
+
+.flatpickr-day.disabled {
+  background: #ccc !important;
+  color: #888 !important;
+  pointer-events: none;
+}
+
 .btn-primary.full {
   display: block;
   width: 100%;

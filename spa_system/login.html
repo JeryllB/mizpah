@@ -27,10 +27,18 @@
   border-radius: 15px;
   width: 350px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  text-align: center;
 }
 
 .form-box h2 {
   font-family: 'Playfair Display', serif;
+  margin-bottom: 5px;
+}
+
+.form-box p {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 20px;
 }
 
 .form-box input {
@@ -39,13 +47,34 @@
   margin: 10px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
+  outline: none;
 }
 
 .form-box button {
   width: 100%;
   margin-top: 10px;
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(to right, #8b6b4a, #c2a27a);
+  color: white;
+  font-size: 16px;
+}
+
+.form-box button:hover {
+  opacity: 0.9;
+}
+
+.register-link {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-link a {
+  color: #8b6b4a;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .login-image {
@@ -55,12 +84,6 @@
   background-position: center;
 }
 
-.error {
-  color: red;
-  font-size: 14px;
-}
-
-/* responsive */
 @media (max-width: 768px) {
   .login-container {
     flex-direction: column;
@@ -71,6 +94,7 @@
   }
 }
 </style>
+
 </head>
 
 <body>
@@ -78,14 +102,12 @@
 <div class="login-container">
 
   <div class="login-form">
+
     <div class="form-box">
 
       <h2>Welcome Back</h2>
       <p>Login to continue your wellness journey</p>
 
-      <p id="errorMsg" class="error"></p>
-
-      <!-- 🔥 UPDATED: CONNECTED TO PHP -->
       <form action="login.php" method="POST">
 
         <input type="email" name="email" placeholder="Email" required>
@@ -95,7 +117,14 @@
 
       </form>
 
+      <!-- REGISTER LINK -->
+      <div class="register-link">
+        <p>Don’t have an account?</p>
+        <a href="register.html">Create account here →</a>
+      </div>
+
     </div>
+
   </div>
 
   <div class="login-image"></div>

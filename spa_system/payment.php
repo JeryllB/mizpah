@@ -1,13 +1,7 @@
 <?php
 $conn = new mysqli("localhost", "root", "", "spa_system", 3307);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// get latest booking
-$sql = "SELECT * FROM bookings ORDER BY id DESC LIMIT 1";
-$result = $conn->query($sql);
+$result = $conn->query("SELECT * FROM bookings ORDER BY id DESC LIMIT 1");
 $booking = $result->fetch_assoc();
 ?>
 
@@ -17,7 +11,6 @@ $booking = $result->fetch_assoc();
 <meta charset="UTF-8">
 <title>Payment - Mizpah Wellness Spa</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
 <style>
@@ -29,108 +22,92 @@ $booking = $result->fetch_assoc();
   margin: auto;
 }
 
-.payment-left {
-  flex: 2;
-  background: white;
-  padding: 30px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.payment-right {
-  flex: 1;
+.payment-left, .payment-right {
   background: white;
   padding: 25px;
   border-radius: 20px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
+.payment-left { flex: 2; }
+.payment-right { flex: 1; }
+
 .section-title {
-  background: linear-gradient(to right, #8b6b4a, #c2a27a);
+  background: #8b6b4a;
   color: white;
-  padding: 12px;
+  padding: 10px;
   border-radius: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .option-box {
   border: 1px solid #ddd;
-  border-radius: 15px;
   padding: 15px;
-  margin-bottom: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .complete-btn {
-  margin-top: 20px;
   width: 100%;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  background: linear-gradient(to right, #8b6b4a, #c2a27a);
+  padding: 12px;
+  background: #8b6b4a;
   color: white;
-  font-size: 16px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
   <h2>Mizpah Wellness Spa</h2>
-  <nav>
-    <a href="booking.html">← Back to Booking</a>
-  </nav>
 </header>
 
 <div class="payment-container">
 
-  <!-- LEFT -->
-  <div class="payment-left">
+<div class="payment-left">
+  <div class="section-title">Payment Options</div>
 
-    <div class="section-title">Payment Options</div>
-
-    <div class="option-box">
-      <label>
-        <input type="radio" name="payment" value="gcash" checked>
-        GCash Payment
-      </label>
-    </div>
-
-    <div class="option-box">
-      <label>
-        <input type="radio" name="payment" value="spa">
-        Pay at Spa
-      </label>
-    </div>
-
-    <button class="complete-btn" onclick="completePayment()">
-      Complete Payment
-    </button>
-
+  <div class="option-box">
+    <input type="radio" name="payment" value="gcash" checked> GCash
   </div>
 
-  <!-- RIGHT -->
-  <div class="payment-right">
-
-    <div class="section-title">Booking Summary</div>
-
-    <p><strong>Service:</strong> <?php echo $booking['service']; ?></p>
-    <p><strong>Therapist:</strong> <?php echo $booking['therapist']; ?></p>
-    <p><strong>Room:</strong> <?php echo $booking['room']; ?></p>
-    <p><strong>Date:</strong> <?php echo $booking['date']; ?></p>
-    <p><strong>Time:</strong> <?php echo $booking['time']; ?></p>
-
-    <p><strong>Status:</strong> Pending Payment</p>
-
+  <div class="option-box">
+    <input type="radio" name="payment" value="spa"> Pay at Spa
   </div>
+
+  <button class="complete-btn" onclick="completePayment()">Complete Payment</button>
+</div>
+
+<div class="payment-right">
+  <div class="section-title">Booking Summary</div>
+
+  <p><b>Name:</b> <?= $booking['name'] ?></p>
+  <p><b>Service:</b> <?= $booking['service'] ?></p>
+  <p><b>Therapist:</b> <?= $booking['therapist'] ?></p>
+  <p><b>Room:</b> <?= $booking['room'] ?></p>
+  <p><b>Date:</b> <?= $booking['date'] ?></p>
+  <p><b>Time:</b> <?= $booking['time'] ?></p>
+
+  <p><b>Status:</b> Pending Payment</p>
+</div>
 
 </div>
 
 <script>
 function completePayment() {
-  window.location.href = "process_payment.php";
+
+  const selected = document.querySelector('input[name="payment"]:checked').value;
+
+  if (selected === "gcash") {
+    alert("Redirecting to GCash...");
+    window.location.href = "process_payment.php?method=gcash";
+  } else {
+    window.location.href = "process_payment.php?method=spa";
+  }
+
 }
 </script>
 

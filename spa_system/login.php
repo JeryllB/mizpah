@@ -1,31 +1,36 @@
 <?php
 session_start();
-$conn = new mysqli("localhost:3307", "root", "", "spa_system");
+
+$conn = new mysqli("localhost","root","","spa_system",3307);
 
 $email = $_POST['email'];
 $password = $_POST['password'];
 
-$sql = "SELECT * FROM users WHERE email='$email' AND password='$password' LIMIT 1";
-$result = $conn->query($sql);
+$result = $conn->query("SELECT * FROM users WHERE email='$email'");
 
-if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
+if ($result->num_rows == 0) {
+    echo "Invalid login";
+    exit();
+}
 
-    // 🔥 CLEAR SESSION FIRST
-    session_unset();
+$user = $result->fetch_assoc();
 
-    $_SESSION['role'] = $row['role'];
-    $_SESSION['email'] = $row['email'];
+if (password_verify($password, $user['password'])) {
 
-    if ($row['role'] == "admin") {
+    $_SESSION['user_id'] = $user['id'];
+    $_SESSION['name'] = $user['name'];
+    $_SESSION['email'] = $user['email'];
+    $_SESSION['role'] = $user['role'];
+
+    if ($user['role'] == "admin") {
         header("Location: admin.php");
-        exit();
     } else {
         header("Location: booking.php");
-        exit();
     }
 
+    exit();
+
 } else {
-    echo "Invalid login!";
+    echo "Invalid login";
 }
 ?>
