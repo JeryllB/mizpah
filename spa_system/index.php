@@ -1,0 +1,196 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mizpah Wellness Spa</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* optional safeguard para di mawala brown theme */
+.btn-primary {
+  background: #8b6b4a;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.btn-outline {
+  border: 1px solid #8b6b4a;
+  color: #8b6b4a;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <h2>Mizpah Wellness Spa</h2>
+  <nav>
+    <a href="index.php">Home</a>
+    <a href="#services">Services</a>
+    <a href="therapists.php">Therapists</a>
+    <a href="#">Virtual Tour</a>
+
+    <a href="login.html" class="btn-primary">Book Appointment</a>
+    <a href="login.html" class="btn-outline">Login</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>
+      Your Sanctuary of <br>
+      <span class="highlight">Wellness</span>
+    </h1>
+
+    <p class="hero-text">
+      Experience tranquility and rejuvenation in our cozy luxury spa.<br>
+      <span class="sub-text">
+        Expert therapists, premium treatments, and a serene atmosphere await you.
+      </span>
+    </p>
+
+    <div class="hero-buttons">
+      <a href="login.html" class="btn-primary">Book Appointment</a>
+      <a href="#" class="btn-outline">Explore Spa Tour</a>
+      <a href="therapists.php" class="btn-outline">View Therapists</a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <h2>Our Premium Services</h2>
+  <p>Indulge in our carefully curated selection of therapeutic treatments designed to restore balance and harmony.</p>
+
+  <div class="card-container">
+
+    <div class="card">
+      <img src="images/service1.jpg">
+      <h3>Swedish Massage</h3>
+      <p>Gentle, flowing strokes to melt away tension and promote deep relaxation.</p>
+      <span>60 min</span><br>
+      <strong>1,150Php</strong>
+    </div>
+
+    <div class="card">
+      <img src="images/service2.jpg">
+      <h3>Deep Tissue</h3>
+      <p>Intensive therapy targeting chronic pain and muscle tension.</p>
+      <span>90 min</span><br>
+      <strong>1,450Php</strong>
+    </div>
+
+    <div class="card">
+      <img src="images/service3.jpg">
+      <h3>Hot Stone Therapy</h3>
+      <p>Warmed stones melt tension while promoting deep muscle relaxation.</p>
+      <span>75 min</span><br>
+      <strong>1,250Php</strong>
+    </div>
+
+    <div class="card">
+      <img src="images/service4.jpg">
+      <h3>Aromatherapy</h3>
+      <p>Essential oils enhance your massage for holistic healing.</p>
+      <span>60 min</span><br>
+      <strong>1,250Php</strong>
+    </div>
+
+    <div class="card">
+      <img src="images/service5.jpg">
+      <h3>Couples Massage</h3>
+      <p>Share the bliss with your partner in our luxurious couples suite.</p>
+      <span>90 min</span><br>
+      <strong>2,500Php</strong>
+    </div>
+
+    <div class="card">
+      <img src="images/service6.jpg">
+      <h3>Thai Massage</h3>
+      <p>Ancient stretching techniques restore flexibility and balance.</p>
+      <span>90 min</span><br>
+      <strong>1,250Php</strong>
+    </div>
+
+  </div>
+
+  <div class="services-btn">
+    <a href="login.html" class="btn-primary">Book Your Treatment</a>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <p class="icon">🏅</p>
+  <h2>What Our Clients Say</h2>
+  <p>Hear from those who have experienced the Mizpah difference.</p>
+
+  <div class="testimonial-container">
+
+    <div class="testimonial">
+      <p>⭐⭐⭐⭐⭐</p>
+      <p>"Absolutely heavenly experience! The hot stone massage was amazing."</p>
+      <h4>Sarah Johnson</h4>
+      <span>Hot Stone Massage</span>
+    </div>
+
+    <div class="testimonial">
+      <p>⭐⭐⭐⭐⭐</p>
+      <p>"Highly recommend Mizpah Wellness! Very relaxing and professional."</p>
+      <h4>Michael Brown</h4>
+      <span>Sports Massage</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="text-align:center; padding:60px;">
+  <h2>Ready to Relax?</h2>
+  <p>Book your appointment today and experience true wellness.</p>
+  <a href="login.html" class="btn-primary">Get Started</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div>
+      <h3>Mizpah Wellness Spa</h3>
+      <p>Your sanctuary of wellness and tranquility.</p>
+    </div>
+
+    <div>
+      <h4>Quick Links</h4>
+      <p><a href="login.html">Book Appointment</a></p>
+      <p><a href="therapists.php">Therapists</a></p>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <p>Unit C, Covelandia Rd, Kawit, Philippines</p>
+      <p>Phone: 0936-995-0038</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Mizpah Wellness Spa</p>
+  </div>
+</footer>
+
+</body>
+</html>

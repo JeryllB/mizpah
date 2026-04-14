@@ -23,41 +23,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = $_POST['date'];
     $time = $_POST['time'];
 
-    // conflict check
-    $checkSql = "SELECT * FROM bookings 
-                 WHERE date='$date' 
-                 AND time='$time' 
-                 AND (therapist='$therapist' OR room='$room')";
+    // CHECK CONFLICT (IMPORTANT)
+    $check = $conn->prepare("
+        SELECT id FROM bookings 
+        WHERE date=? 
+        AND time=? 
+        AND therapist=?
+    ");
 
-    $result = $conn->query($checkSql);
+    $check->bind_param("sss", $date, $time, $therapist);
+    $check->execute();
+    $result = $check->get_result();
 
     if ($result->num_rows > 0) {
-
-        echo "❌ Slot already booked";
+        echo "<script>
+            alert('❌ Slot already taken!');
+            window.location.href='booking.php';
+        </script>";
         exit();
-
-    } else {
-
-        // INSERT FIXED (IMPORTANT)
-        $sql = "INSERT INTO bookings 
-        (user_id, name, email, service, therapist, room, date, time, status)
-        VALUES 
-        ('$user_id', '$name', '$email', '$service', '$therapist', '$room', '$date', '$time', 'Pending')";
-
-        if ($conn->query($sql) === TRUE) {
-
-            echo "<script>
-                alert('Booking Successful!');
-                window.location.href='payment.php';
-            </script>";
-            exit();
-
-        } else {
-            echo "❌ Error: " . $conn->error;
-        }
     }
 
-} else {
-    echo "❌ Invalid request";
+    // INSERT BOOKING
+    $insert = $conn->prepare("
+        INSERT INTO bookings 
+        (user_id, name, email, service, therapist, room, date, time, status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Pending')
+    ");
+
+    $insert->bind_param(
+        "isssssss",
+        $user_id,
+        $name,
+        $email,
+        $service,
+        $therapist,
+        $room,
+        $date,
+        $time
+    );
+
+    if ($insert->execute()) {
+        echo "<script>
+            alert('✅ Booking Successful!');
+            window.location.href='payment.php';
+        </script>";
+    } else {
+        echo "❌ Error: " . $conn->error;
+    }
 }
 ?>
