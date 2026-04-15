@@ -23,7 +23,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $date = $_POST['date'];
     $time = $_POST['time'];
 
-    // CHECK CONFLICT (IMPORTANT)
+    /* =========================
+       SERVICE PRICING
+    ========================= */
+    $prices = [
+        "Swedish Massage - 60 min" => 1150,
+        "Deep Tissue - 90 min" => 1450,
+        "Hot Stone Therapy - 75 min" => 1250
+    ];
+
+    $amount = $prices[$service] ?? 0;
+
+    /* =========================
+       CHECK SLOT CONFLICT
+    ========================= */
     $check = $conn->prepare("
         SELECT id FROM bookings 
         WHERE date=? 
@@ -43,15 +56,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    // INSERT BOOKING
+    /* =========================
+       INSERT BOOKING
+    ========================= */
     $insert = $conn->prepare("
         INSERT INTO bookings 
-        (user_id, name, email, service, therapist, room, date, time, status)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'Pending')
+        (user_id, name, email, service, therapist, room, date, time, amount, status, payment_status)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Pending', 'Unpaid')
     ");
 
     $insert->bind_param(
-        "isssssss",
+        "isssssssd",
         $user_id,
         $name,
         $email,
@@ -59,14 +74,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $therapist,
         $room,
         $date,
-        $time
+        $time,
+        $amount
     );
 
+    /* =========================
+       EXECUTE
+    ========================= */
     if ($insert->execute()) {
+
         echo "<script>
-            alert('✅ Booking Successful!');
-            window.location.href='payment.php';
+            alert('Booking submitted! Waiting for admin confirmation.');
+            window.location.href='my_bookings.php';
         </script>";
+
     } else {
         echo "❌ Error: " . $conn->error;
     }

@@ -112,7 +112,7 @@ body {
     Receipt #: <?= $receipt ?>
   </div>
 
-  <a href="index.html" class="btn-home">Back to Home</a>
+  <a href="index.php" class="btn-home">Back to Home</a>
 
 </div>
 

@@ -8,76 +8,102 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
 
 $conn = new mysqli("localhost", "root", "", "spa_system", 3307);
 
-// DASHBOARD STATS
-$totalBookings = $conn->query("SELECT COUNT(*) as total FROM bookings")->fetch_assoc()['total'];
+/* =========================
+   FETCH BOOKINGS (FIXED)
+   - EXCLUDE DONE
+========================= */
+$result = $conn->query("
+SELECT * FROM bookings 
+WHERE status != 'Done'
+ORDER BY id DESC
+");
+
+/* =========================
+   STATS
+========================= */
+$total = $conn->query("SELECT COUNT(*) as total FROM bookings")->fetch_assoc()['total'];
 $pending = $conn->query("SELECT COUNT(*) as total FROM bookings WHERE status='Pending'")->fetch_assoc()['total'];
 $approved = $conn->query("SELECT COUNT(*) as total FROM bookings WHERE status='Approved'")->fetch_assoc()['total'];
 $done = $conn->query("SELECT COUNT(*) as total FROM bookings WHERE status='Done'")->fetch_assoc()['total'];
 
-// SEARCH
-$search = $_GET['search'] ?? '';
-$status = $_GET['status'] ?? '';
+/* =========================
+   PAYMENT STATS (SAFE)
+========================= */
+$paid = 0;
+$unpaid = 0;
 
-$sql = "SELECT * FROM bookings WHERE 1";
+$check = $conn->query("SHOW COLUMNS FROM bookings LIKE 'payment_status'");
+if ($check && $check->num_rows > 0) {
 
-if ($search) {
-    $sql .= " AND name LIKE '%$search%'";
+    $paid = $conn->query("
+        SELECT COUNT(*) as total 
+        FROM bookings 
+        WHERE payment_status='Paid'
+    ")->fetch_assoc()['total'];
+
+    $unpaid = $conn->query("
+        SELECT COUNT(*) as total 
+        FROM bookings 
+        WHERE payment_status='Unpaid'
+    ")->fetch_assoc()['total'];
 }
-
-if ($status) {
-    $sql .= " AND status='$status'";
-}
-
-$sql .= " ORDER BY id DESC";
-
-$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-<title>Admin Dashboard</title>
-<link rel="stylesheet" href="style.css">
+<title>Manage Bookings</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
   font-family: Poppins;
   background: #f5f2ee;
+  margin: 0;
 }
 
 /* HEADER */
 header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 40px;
   background: white;
+}
+
+header a {
+  text-decoration: none;
+  color: #8b6b4a;
+  margin-left: 15px;
+  font-weight: 500;
+}
+
+header a:hover {
+  color: #5a3e2b;
 }
 
 /* DASHBOARD */
 .dashboard {
   display: flex;
-  gap: 20px;
+  gap: 15px;
   padding: 20px 40px;
+  flex-wrap: wrap;
 }
 
 .card {
   flex: 1;
+  min-width: 150px;
   background: white;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .card h3 {
+  margin: 0;
   color: #8b6b4a;
-}
-
-/* BUTTON INSIDE CARD */
-.card button {
-  margin-top: 10px;
-  background: #8b6b4a;
-  color: white;
 }
 
 /* TABLE */
@@ -94,9 +120,10 @@ table {
 th {
   background: #8b6b4a;
   color: white;
+  padding: 10px;
 }
 
-th, td {
+td {
   padding: 10px;
   text-align: center;
 }
@@ -115,17 +142,13 @@ button {
 
 .approve-btn { background: green; color: white; }
 .done-btn { background: blue; color: white; }
+.pay-btn { background: #1f8b4c; color: white; }
 .delete-btn { background: red; color: white; }
 
-/* STATUS COLORS */
+/* STATUS */
 .status-pending { color: orange; font-weight: bold; }
 .status-approved { color: blue; font-weight: bold; }
 .status-done { color: gray; font-weight: bold; }
-
-/* SEARCH */
-.search-box {
-  margin-bottom: 15px;
-}
 </style>
 
 </head>
@@ -133,18 +156,18 @@ button {
 <body>
 
 <header>
-  <h2>Mizpah Admin Dashboard</h2>
+  <h2>Manage Bookings</h2>
   <div>
-    <a href="index.html">View Site</a> |
+    <a href="admin.php">Back to Dashboard</a>
     <a href="logout.php">Logout</a>
   </div>
 </header>
 
-<!-- DASHBOARD CARDS -->
+<!-- DASHBOARD -->
 <div class="dashboard">
 
   <div class="card">
-    <h3><?= $totalBookings ?></h3>
+    <h3><?= $total ?></h3>
     <p>Total Bookings</p>
   </div>
 
@@ -163,38 +186,23 @@ button {
     <p>Done</p>
   </div>
 
-  <!-- ✅ NEW CARD -->
   <div class="card">
-    <h3>👩‍⚕️</h3>
-    <p>Therapists</p>
-    <a href="manage_therapists.php">
-      <button>Manage</button>
-    </a>
+    <h3><?= $paid ?></h3>
+    <p>Paid</p>
+  </div>
+
+  <div class="card">
+    <h3><?= $unpaid ?></h3>
+    <p>Unpaid</p>
   </div>
 
 </div>
 
-<!-- BOOKINGS -->
+<!-- TABLE -->
 <div class="container">
-
-<h2>Manage Bookings</h2>
-
-<form method="GET" class="search-box">
-  <input type="text" name="search" placeholder="Search name..." value="<?= $search ?>">
-  
-  <select name="status">
-    <option value="">All</option>
-    <option value="Pending" <?= ($status=="Pending")?"selected":"" ?>>Pending</option>
-    <option value="Approved" <?= ($status=="Approved")?"selected":"" ?>>Approved</option>
-    <option value="Done" <?= ($status=="Done")?"selected":"" ?>>Done</option>
-  </select>
-
-  <button>Search</button>
-</form>
 
 <table>
 <tr>
-<th>ID</th>
 <th>Name</th>
 <th>Service</th>
 <th>Therapist</th>
@@ -202,13 +210,14 @@ button {
 <th>Date</th>
 <th>Time</th>
 <th>Status</th>
+<th>Payment</th>
+<th>Amount</th>
 <th>Action</th>
 </tr>
 
 <?php while($row = $result->fetch_assoc()): ?>
 <tr>
 
-<td><?= $row['id'] ?></td>
 <td><?= $row['name'] ?></td>
 <td><?= $row['service'] ?></td>
 <td><?= $row['therapist'] ?></td>
@@ -221,30 +230,40 @@ button {
 <span class="status-pending">Pending</span>
 <?php elseif($row['status']=="Approved"): ?>
 <span class="status-approved">Approved</span>
-<?php elseif($row['status']=="Done"): ?>
+<?php else: ?>
 <span class="status-done">Done</span>
 <?php endif; ?>
 </td>
+
+<td><?= $row['payment_status'] ?? 'Unpaid' ?></td>
+<td>₱<?= number_format($row['amount'] ?? 0,2) ?></td>
 
 <td>
 
 <?php if($row['status']=="Pending"): ?>
 <form method="POST" action="approve_booking.php" style="display:inline;">
-<input type="hidden" name="id" value="<?= $row['id'] ?>">
-<button class="approve-btn">Approve</button>
+  <input type="hidden" name="id" value="<?= $row['id'] ?>">
+  <button type="submit" class="approve-btn">Approve</button>
 </form>
 <?php endif; ?>
 
-<?php if($row['status']=="Approved"): ?>
+<?php if($row['status']!="Done"): ?>
 <form method="POST" action="done_booking.php" style="display:inline;">
-<input type="hidden" name="id" value="<?= $row['id'] ?>">
-<button class="done-btn">Done</button>
+  <input type="hidden" name="id" value="<?= $row['id'] ?>">
+  <button type="submit" class="done-btn">Done</button>
+</form>
+<?php endif; ?>
+
+<?php if(($row['payment_status'] ?? 'Unpaid') != "Paid"): ?>
+<form method="POST" action="mark_paid.php" style="display:inline;">
+  <input type="hidden" name="id" value="<?= $row['id'] ?>">
+  <button type="submit" class="pay-btn">Mark Paid</button>
 </form>
 <?php endif; ?>
 
 <form method="POST" action="delete_booking.php" style="display:inline;">
-<input type="hidden" name="id" value="<?= $row['id'] ?>">
-<button class="delete-btn">Delete</button>
+  <input type="hidden" name="id" value="<?= $row['id'] ?>">
+  <button type="submit" class="delete-btn">Delete</button>
 </form>
 
 </td>
